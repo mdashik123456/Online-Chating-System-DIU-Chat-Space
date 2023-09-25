@@ -66,7 +66,7 @@ if (isset($_POST['logout_btn'])) {
                     <div class="col-8">
                         <center>
                             <div class="content">
-                                <img id="profile_pic" src="<?php echo $_SESSION['profile_pic']; ?>"
+                                <img id="profile_pic" class='img-thumbnail' src="<?php echo $_SESSION['profile_pic']; ?>"
                                     alt="Profile Picture">
                                 <div class="details">
                                     <span>
