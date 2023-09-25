@@ -17,7 +17,7 @@ if (!isset($_SESSION['username'])) {
 
 if (isset($_POST['logout_btn'])) {
     $username = $_SESSION['username'];
-    mysqli_query($conn, "UPDATE `users` SET `isLoggedIn` = 'no' WHERE `username` = '$username' ");
+    mysqli_query($conn, "UPDATE `users` SET `isLoggedIn` = 'Not Active' WHERE `username` = '$username' ");
     log_out();
 }
 ?>
@@ -96,13 +96,13 @@ if (isset($_POST['logout_btn'])) {
                         <!-- uaer list -->
 
                         <table class="table" id="user_list_table">
-                            <tbody>
+                            <!-- <tbody>
                                 <tr>
                                     <td><img src="./images/profile.PNG" class="img-thumbnail" style="height: 70px; width:70px;"></td>
                                     <td><p> Sazzad Hossain <br>No Messege Available</p></td>
                                     <td><i id="active_status" class="fa-solid fa-circle fa-2xs"></i></td>
                                 </tr>
-                            </tbody>
+                            </tbody> -->
                         </table>
 
 
@@ -151,11 +151,6 @@ if (isset($_POST['logout_btn'])) {
                     </div>
                 </div>
 
-
-
-
-
-
             </div>
 
 
@@ -171,13 +166,13 @@ if (isset($_POST['logout_btn'])) {
     <script>
         function fetchData() {
             $.ajax({
-                url: 'fetch_data.php', // Replace with the actual URL of your PHP script
-                dataType: 'json',
+                url: 'get_user_from_db.php',
+                type: 'POST',
                 success: function (data) {
                     // Clear existing data
                     $('#user_list_table').empty();
-
-                    
+                    $('#user_list_table').html(data);
+            
                 },
                 complete: function () {
                     // Schedule the next data fetch after a delay (e.g., every 5 seconds)

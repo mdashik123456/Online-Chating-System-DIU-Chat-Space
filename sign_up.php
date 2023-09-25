@@ -5,6 +5,7 @@ if (isset($_POST["signup_btn"])) {
     $name = htmlentities(mysqli_real_escape_string($conn, $_POST["name"]));
     $username = htmlentities(mysqli_real_escape_string($conn, $_POST["username"]));
     $email = htmlentities(mysqli_real_escape_string($conn, $_POST["email"]));
+    $bio = htmlentities(mysqli_real_escape_string($conn, $_POST["bio"]));
     $password = htmlentities(mysqli_real_escape_string($conn, $_POST["password"]));
     $confirm_password = htmlentities(mysqli_real_escape_string($conn, $_POST["confirm_password"]));
     $gender = htmlentities(mysqli_real_escape_string($conn, $_POST["gender"]));
@@ -43,7 +44,7 @@ if (isset($_POST["signup_btn"])) {
         exit();
     }
 
-    $q = "INSERT INTO `users` (`id`, `username`, `name`, `email`, `password`, `gender`, `profile_pic`) VALUES (NULL, '$username', '$name', '$email', '$password', '$gender', '$profile_pic') ";
+    $q = "INSERT INTO `users` (`id`, `username`, `name`, `email`, `password`, `gender`, `profile_pic`, `bio`) VALUES (NULL, '$username', '$name', '$email', '$password', '$gender', '$profile_pic', '$bio') ";
     if (mysqli_query($conn, $q)) {
         // echo "<script>alert('Congratulation $name, your account has been created successfully')</script>";
         // echo "<script>window.open('index.php','_self')</script>";
@@ -110,7 +111,12 @@ if (isset($_POST["signup_btn"])) {
                     <div class="mb-3">
                         <label for="confirm_password" class="form-label">Confirm Password</label>
                         <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Reenter Password" onkeyup="validate_password()" required>
-                    </div><span id="wrong_pass_alert"></span><br><br>
+                    </div><span id="wrong_pass_alert"></span>
+
+                    <div class="mb-3 ">
+                        <label for="name" class="form-label">Bio</label>
+                        <input type="text" class="form-control" id="bio" name="bio" placeholder="Write somthing about you" required>
+                    </div>
 
                     <div class="form-check" required>
                         <input class="form-check-input" type="radio" name="gender" id="male" value="Male" checked>

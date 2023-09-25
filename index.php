@@ -17,7 +17,7 @@ if (isset($_POST['signin_btn'])) {
     if ($row = mysqli_fetch_assoc($data)) {
 
         if (password_verify($password, $row["password"])) {
-            mysqli_query($conn, "UPDATE `users` SET `isLoggedIn` = 'yes' WHERE `username` = '$username' ");
+            mysqli_query($conn, "UPDATE `users` SET `isLoggedIn` = 'Active Now' WHERE `username` = '$username' ");
             $_SESSION['username'] = $username;
             $_SESSION['name'] = $row["name"];
             $_SESSION['profile_pic'] = $row["profile_pic"];
