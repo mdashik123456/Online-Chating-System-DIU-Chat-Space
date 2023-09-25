@@ -95,7 +95,7 @@ if (isset($_POST['logout_btn'])) {
 
                         <!-- uaer list -->
 
-                        <table class="table">
+                        <table class="table" id="user_list_table">
                             <tbody>
                                 <tr>
                                     <td><img src="./images/profile.PNG" class="img-thumbnail" style="height: 70px; width:70px;"></td>
@@ -163,6 +163,32 @@ if (isset($_POST['logout_btn'])) {
 
     </div>
 
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+
+    <script>
+        function fetchData() {
+            $.ajax({
+                url: 'fetch_data.php', // Replace with the actual URL of your PHP script
+                dataType: 'json',
+                success: function (data) {
+                    // Clear existing data
+                    $('#user_list_table').empty();
+
+                    
+                },
+                complete: function () {
+                    // Schedule the next data fetch after a delay (e.g., every 5 seconds)
+                    setTimeout(fetchData, 5000);
+                }
+            });
+        }
+
+        // Initial data fetch
+        fetchData();
+    </script>
 
 
     <footer class="footer mt-auto py-3 bg-light">
