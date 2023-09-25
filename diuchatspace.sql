@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
