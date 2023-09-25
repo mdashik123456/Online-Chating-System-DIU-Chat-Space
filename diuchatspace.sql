@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 15, 2023 at 07:23 PM
+-- Generation Time: Sep 25, 2023 at 11:24 AM
 -- Server version: 5.7.24
--- PHP Version: 7.4.16
+-- PHP Version: 8.1.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `diuchatspace`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `msg_id` int(11) NOT NULL,
+  `incoming_msg_user` int(255) NOT NULL,
+  `outgoing_msg_user` int(255) NOT NULL,
+  `msg` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -44,11 +57,17 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `name`, `email`, `password`, `gender`, `isLoggedIn`, `profile_pic`) VALUES
 (1, 'mac', 'mac ashik', 'mac@mac.com', '$2y$10$JN4C7sFquKR/kGN9EkCIv.FRFLMhfDBoryeN27JvKzOGTa4OOVtwS', 'Male', 'yes', './images/mac.jpeg'),
-(2, 'pc', 'pc ashik', 'pc@pc.com', '$2y$10$akHm/HsOn7xWkjuXpn11jeMwG3TGiszWaSqKXRaOWSY8RFSaII6Me', 'Male', 'no', './images/pc.jpeg');
+(2, 'pc', 'pc ashik', 'pc@pc.com', '$2y$10$akHm/HsOn7xWkjuXpn11jeMwG3TGiszWaSqKXRaOWSY8RFSaII6Me', 'Male', 'yes', './images/pc.jpeg');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`msg_id`);
 
 --
 -- Indexes for table `users`
@@ -59,6 +78,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
