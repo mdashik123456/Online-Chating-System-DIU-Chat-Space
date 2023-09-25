@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `messages`
 --
 
-CREATE TABLE `messages` (
+CREATE TABLE IF NOT EXISTS `messages` (
   `msg_id` int(11) NOT NULL,
   `incoming_msg_user` int(255) NOT NULL,
   `outgoing_msg_user` int(255) NOT NULL,
