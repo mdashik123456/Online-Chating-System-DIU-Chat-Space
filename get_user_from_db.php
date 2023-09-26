@@ -20,7 +20,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         $output .= "<tbody>
                 <tr>
                     <td><a href='?incoming_user=".$row['username']."'><img src='".$row['profile_pic']."' class='img-thumbnail' style='height: 70px; width:70px;'></a></td>
-                    <td><a href='?incoming_user=".$row['username']."'><p>" . $row["name"]. "<br>".$row["bio"]."</p></a></td>
+                    <td><a href='?incoming_user=".$row['username']."'><p><strong>" . $row["name"]. "</strong><br>".$row["bio"]."</p></a></td>
                     <td>".$isLoggedIn."</td>
                 </tr>
             </tbody>";

@@ -95,7 +95,7 @@ if (isset($_POST['logout_btn'])) {
                                     src="<?php echo $_SESSION['profile_pic']; ?>" alt="Profile Picture">
                                 <div class="details">
                                     <span>
-                                        <?php echo $_SESSION['name'];
+                                        <?php echo "<strong>".$_SESSION['name']."</strong>";
                                         //echo $_SESSION['profile_pic']; ?>
                                     </span>
                                     <p>Active Now &nbsp;<i id="active_status" class="fa-solid fa-circle fa-2xs"></i></p>
@@ -143,16 +143,18 @@ if (isset($_POST['logout_btn'])) {
 
                 <div class="container chat-container">
 
+                <!-- top user  -->
                     <p class="text-center">
                         <?php
                         if (isset($_GET['incoming_user'])) {
-                            $row = fetch_user_top($_GET['incoming_user'], $conn);
+                            $incoming_user = $_GET['incoming_user'];
+                            $row = fetch_user_top($incoming_user, $conn);
                             echo "<img src='" . $row["profile_pic"] . "' class='img-thumbnail' style='height: 70px; width:70px;'>";
                             ?>
                         </p>
                         <p class="text-center">
                             <?php
-                            echo $row["name"] . " (" . $row["username"] . ")";
+                            echo "<strong>".$row["name"] . " (" . $row["username"] . ")</strong>";
                             ?>
                         </p>
                         <p class="text-center">
@@ -168,6 +170,8 @@ if (isset($_POST['logout_btn'])) {
                         }
                         ?>
                     </p>
+
+
                     <div class="chat-list">
 
                         <div class="message-container">
