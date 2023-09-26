@@ -68,13 +68,13 @@ form {
 
 a {
     text-decoration: none;
-    font-style: italic;
-    font-weight: bold;
+    font-style: normal;
+    font-weight: normal;
     color: rgb(14, 14, 14);
 }
 
 a:hover {
-    color: rgb(124, 20, 209);
+    color: black;
 }
 
 .footerImage {
@@ -129,7 +129,3 @@ a:hover {
     align-self: flex-end;
 }
 
-.user_link:link, .user_link:visited{
-    text-decoration: none !important;
-    color: black;
-}

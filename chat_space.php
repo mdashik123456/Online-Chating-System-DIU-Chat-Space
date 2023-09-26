@@ -10,6 +10,19 @@ function log_out()
     exit();
 }
 
+function fetch_user_top($username, $conn)
+{
+    $sql = "SELECT * FROM `users` WHERE `username` = '$username'";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) == 1) {
+        return mysqli_fetch_assoc($result);
+    } else{
+        $sql = "SELECT * FROM `users` WHERE `id`= '1' AND `name` = 'Sorry, no user found!' AND `email` = 'none@none.com' AND `gender` = 'none' AND `isLoggedIn` = 'none' AND `bio` = 'none'";
+        $result = mysqli_query($conn, $sql);
+        return mysqli_fetch_assoc($result);
+    }
+}
+
 if (!isset($_SESSION['username'])) {
     log_out();
 }
@@ -20,6 +33,8 @@ if (isset($_POST['logout_btn'])) {
     mysqli_query($conn, "UPDATE `users` SET `isLoggedIn` = 'Not Active' WHERE `username` = '$username' ");
     log_out();
 }
+
+
 ?>
 
 
@@ -46,6 +61,14 @@ if (isset($_POST['logout_btn'])) {
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style_chat_space.css">
 
+    <!-- <style>
+        a:link,
+        a:visited {
+            text-decoration: none !important;
+            color: black;
+        }
+    </style> -->
+
     <title>Chat Space</title>
 </head>
 
@@ -66,8 +89,8 @@ if (isset($_POST['logout_btn'])) {
                     <div class="col-8">
                         <center>
                             <div class="content">
-                                <img id="profile_pic" class='img-thumbnail' src="<?php echo $_SESSION['profile_pic']; ?>"
-                                    alt="Profile Picture">
+                                <img id="profile_pic" class='img-thumbnail'
+                                    src="<?php echo $_SESSION['profile_pic']; ?>" alt="Profile Picture">
                                 <div class="details">
                                     <span>
                                         <?php echo $_SESSION['name'];
@@ -118,10 +141,30 @@ if (isset($_POST['logout_btn'])) {
 
                 <div class="container chat-container">
 
-                    <p class="text-center"><img src="./images/profile.PNG" class="img-thumbnail"
-                            style="height: 70px; width:70px;"></p>
-                    <p class="text-center">Sazzad Hossain (sazzad65)</p>
-                    <p class="text-center">Active Now &nbsp;<i id="active_status" class="fa-solid fa-circle fa-2xs"></i>
+                    <p class="text-center">
+                        <?php
+                        if (isset($_GET['incoming_user'])) {
+                            $row = fetch_user_top($_GET['incoming_user'], $conn);
+                            echo "<img src='" . $row["profile_pic"] . "' class='img-thumbnail' style='height: 70px; width:70px;'>";
+                            ?>
+                        </p>
+                        <p class="text-center">
+                            <?php
+                            echo $row["name"] . " (" . $row["username"] . ")";
+                            ?>
+                        </p>
+                        <p class="text-center">
+                            <?php
+                            echo $row["isLoggedIn"];
+                            ?>&nbsp;
+                            <?php
+                            if ($row["isLoggedIn"] === "Active Now") {
+                                echo "<i id='active_status'class='fa-solid fa-circle fa-2xs'></i>";
+                            } else {
+                                echo "<i id='active_status'class='fa-regular fa-circle fa-2xs'></i>";
+                            }
+                        }
+                        ?>
                     </p>
                     <div class="chat-list">
 
@@ -160,7 +203,8 @@ if (isset($_POST['logout_btn'])) {
 
 
     <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
 
     <script>
@@ -172,7 +216,7 @@ if (isset($_POST['logout_btn'])) {
                     // Clear existing data
                     $('#user_list_table').empty();
                     $('#user_list_table').html(data);
-            
+
                 },
                 complete: function () {
                     // Schedule the next data fetch after a delay (e.g., every 5 seconds)
