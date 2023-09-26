@@ -16,7 +16,7 @@ function fetch_user_top($username, $conn)
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) == 1) {
         return mysqli_fetch_assoc($result);
-    } else{
+    } else {
         $sql = "SELECT * FROM `users` WHERE `id`= '1' AND `name` = 'Sorry, no user found!' AND `email` = 'none@none.com' AND `gender` = 'none' AND `isLoggedIn` = 'none' AND `bio` = 'none'";
         $result = mysqli_query($conn, $sql);
         return mysqli_fetch_assoc($result);
@@ -61,13 +61,15 @@ if (isset($_POST['logout_btn'])) {
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style_chat_space.css">
 
-    <!-- <style>
+    <style>
         a:link,
         a:visited {
             text-decoration: none !important;
             color: black;
+            font-style: normal;
+            font-weight: normal;
         }
-    </style> -->
+    </style>
 
     <title>Chat Space</title>
 </head>
