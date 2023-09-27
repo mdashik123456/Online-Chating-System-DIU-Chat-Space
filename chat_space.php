@@ -143,7 +143,7 @@ if (isset($_POST['logout_btn'])) {
 
                 <div class="container chat-container">
 
-                <!-- top user  -->
+                <!-- incoming user  -->
                     <p class="text-center">
                         <?php
                         if (isset($_GET['incoming_user'])) {
@@ -172,24 +172,17 @@ if (isset($_POST['logout_btn'])) {
                     </p>
 
 
-                    <div class="chat-list">
-
-                        <div class="message-container">
-
+                    <div class="chat-list message-container" id="chat-massages-list">
 
                             <!-- Add more messages here -->
-                            <div class="message other-message">
+                            <!-- <div class="message other-message">
                                 <p>Hello, how are you?</p>
                             </div>
 
                             <div class="message user-message">
                                 <p>I'm doing great! Thanks for asking.</p>
-                            </div>
+                            </div> -->
                             <!-- Add more messages here -->
-
-
-                        </div>
-
 
                     </div>
                     <div class="input-group mb-3">
@@ -219,7 +212,6 @@ if (isset($_POST['logout_btn'])) {
                 url: 'get_user_from_db.php',
                 type: 'POST',
                 success: function (data) {
-                    // Clear existing data
                     $('#user_list_table').empty();
                     $('#user_list_table').html(data);
 
