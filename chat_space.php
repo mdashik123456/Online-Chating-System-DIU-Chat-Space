@@ -254,6 +254,7 @@ if (isset($_POST['logout_btn'])) {
 
     </script>
 
+<!-- problem is messege not sent to db -->
     <script>
         $("#button-addon2").on("click", function (event) {
             event.preventDefault;
