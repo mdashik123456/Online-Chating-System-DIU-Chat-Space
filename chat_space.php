@@ -95,7 +95,7 @@ if (isset($_POST['logout_btn'])) {
                                     src="<?php echo $_SESSION['profile_pic']; ?>" alt="Profile Picture">
                                 <div class="details">
                                     <span>
-                                        <?php echo "<strong>".$_SESSION['name']."</strong>";
+                                        <?php echo "<strong>" . $_SESSION['name'] . "</strong>";
                                         //echo $_SESSION['profile_pic']; ?>
                                     </span>
                                     <p>Active Now &nbsp;<i id="active_status" class="fa-solid fa-circle fa-2xs"></i></p>
@@ -143,7 +143,7 @@ if (isset($_POST['logout_btn'])) {
 
                 <div class="container chat-container">
 
-                <!-- incoming user  -->
+                    <!-- incoming user  -->
                     <p class="text-center">
                         <?php
                         if (isset($_GET['incoming_user'])) {
@@ -154,7 +154,7 @@ if (isset($_POST['logout_btn'])) {
                         </p>
                         <p class="text-center">
                             <?php
-                            echo "<strong>".$row["name"] . " (" . $row["username"] . ")</strong>";
+                            echo "<strong>" . $row["name"] . " (" . $row["username"] . ")</strong>";
                             ?>
                         </p>
                         <p class="text-center">
@@ -174,23 +174,28 @@ if (isset($_POST['logout_btn'])) {
 
                     <div class="chat-list message-container" id="chat-massages-list">
 
-                            <!-- Add more messages here -->
-                            <!-- <div class="message other-message">
+                        <!-- Add more messages here -->
+                        <!-- <div class="message other-message">
                                 <p>Hello, how are you?</p>
                             </div>
 
                             <div class="message user-message">
                                 <p>I'm doing great! Thanks for asking.</p>
                             </div> -->
-                            <!-- Add more messages here -->
+                        <!-- Add more messages here -->
 
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Type Messege to Send"
-                            aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btn-dark" type="button" id="button-addon2"><i
-                                class="fa-solid fa-paper-plane"></i></button>
-                    </div>
+
+
+                    <form action="#" method="POST">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Type Messege to Send"
+                                aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button class="btn btn-dark" type="submit" id="button-addon2" name = "send_message_btn"><i
+                                    class="fa-solid fa-paper-plane"></i></button>
+
+                        </div>
+                    </form>
                 </div>
 
             </div>
@@ -207,7 +212,7 @@ if (isset($_POST['logout_btn'])) {
 
 
     <script>
-        function fetchData() {
+        function fetchUserListData() {
             $.ajax({
                 url: 'get_user_from_db.php',
                 type: 'POST',
@@ -218,13 +223,15 @@ if (isset($_POST['logout_btn'])) {
                 },
                 complete: function () {
                     // Schedule the next data fetch after a delay (e.g., every 5 seconds)
-                    setTimeout(fetchData, 5000);
+                    setTimeout(fetchUserListData, 5000);
                 }
             });
         }
 
         // Initial data fetch
-        fetchData();
+        fetchUserListData();
+
+
     </script>
 
 
