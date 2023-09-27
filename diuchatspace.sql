@@ -60,10 +60,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `name`, `email`, `password`, `gender`, `isLoggedIn`, `profile_pic`, `bio`) VALUES
-(1, '', 'Sorry, no user found!', 'none@none.com', '', 'none', 'none', './images/profile.PNG', 'none'),
-(3, 'asus', 'Asus Laptop', 'asus@g.co', '$2y$10$gwFds0joHLjFO0fvU/o.9.aGHDYxuTemK/BoJEsQVR64bJYwUqs/S', 'Male', 'Active Now', './images/asus.png', 'This is my asus laptop.'),
-(4, 'mac', 'MAc Book', 'mac@m.co', '$2y$10$jGNnzECyxc6OsBIeI4rOP.V6YJ5gBAvBDbOh0Az47g/eTcvVK/kIW', 'Female', 'Not Active', './images/mac.jpeg', 'This is my macbook.'),
-(5, 'ashik', 'Ashik Rahman', 'ashikrahman@gmail.com', '$2y$10$YMsNmDmG.le1jF.V.w9EO.3ENLioy70OPd6Z3dZ9aF8s/Dsp7iye6', 'Male', 'Not Active', './images/ashik.jpg', 'My name is Asahik');
+(1, '', 'Sorry, no user found!', 'none@none.com', '', 'none', 'none', './images/profile.PNG', 'none')
 
 --
 -- Indexes for dumped tables
