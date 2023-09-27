@@ -75,3 +75,25 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
+
+$("#button-addon2").on("click", function (event) {
+            event.preventDefault;
+            var msg = $("#send-message-box").val();
+            var incoming_msg_user = "<?php echo $_GET["incoming_user"] ?>";
+            var outgoing_msg_user = "<?php echo $_SESSION["username"] ?>";
+
+            $.ajax({
+                url: 'store_msg_to_db.php',
+                type: 'POST',
+                data: {msg: msg, incoming_msg_user:incoming_msg_user, outgoing_msg_user:outgoing_msg_user},
+                success: function (data) {
+
+                },
+                complete: function () {
+                    // Schedule the next data fetch after a delay (e.g., every 5 seconds)
+                    setTimeout(fetchUserListData, 5000);
+                }
+            });
+        });

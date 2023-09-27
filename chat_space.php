@@ -30,10 +30,10 @@ if (!isset($_SESSION['username'])) {
 
 if (isset($_POST['logout_btn'])) {
     $username = $_SESSION['username'];
-    mysqli_query($conn, "UPDATE `users` SET `isLoggedIn` = 'Not Active' WHERE `username` = '$username' ");
+    $sql = "UPDATE `users` SET `isLoggedIn` = 'Not Active' WHERE `username` = '$username' ";
+    mysqli_query($conn, $sql);
     log_out();
 }
-
 
 ?>
 
@@ -187,15 +187,14 @@ if (isset($_POST['logout_btn'])) {
                     </div>
 
 
-                    <form action="#" method="POST">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Type Messege to Send"
-                                aria-label="Recipient's username" aria-describedby="button-addon2">
-                            <button class="btn btn-dark" type="submit" id="button-addon2" name = "send_message_btn"><i
-                                    class="fa-solid fa-paper-plane"></i></button>
+                    <div class="input-group mb-3">
+                        <input name="send-message-box" type="text" class="form-control"
+                            placeholder="Type Messege to Send" aria-label="Recipient's username"
+                            aria-describedby="button-addon2">
+                        <button name="send-message-btn" class="btn btn-dark" type="submit" id="button-addon2"><i
+                                class="fa-solid fa-paper-plane"></i></button>
 
-                        </div>
-                    </form>
+                    </div>
                 </div>
 
             </div>
@@ -232,6 +231,49 @@ if (isset($_POST['logout_btn'])) {
         fetchUserListData();
 
 
+
+
+
+        // function loadMessages(){
+        //     var msg = $("")
+        //     $.ajax({
+        //         url: 'get_messages_from_db.php?incoming_user=<?php //echo $_GET['incoming_user']; ?>',
+        //         type: 'POST',
+        //         success: function (data) {
+        //             $('#user_list_table').empty();
+        //             $('#user_list_table').html(data);
+
+        //         },
+        //         complete: function () {
+        //             // Schedule the next data fetch after a delay (e.g., every 5 seconds)
+        //             setTimeout(fetchUserListData, 5000);
+        //         }
+        //     });
+        // }
+
+
+    </script>
+
+    <script>
+        $("#button-addon2").on("click", function (event) {
+            event.preventDefault;
+            var msg = $("#send-message-box").val();
+            var incoming_msg_user = <?php echo $_GET["incoming_user"] ?>;
+            var outgoing_msg_user = <?php echo $_SESSION["username"] ?>;
+
+            $.ajax({
+                url: 'store_msg_to_db.php',
+                type: 'POST',
+                data: { msg: msg, incoming_msg_user: incoming_msg_user, outgoing_msg_user: outgoing_msg_user },
+                success: function (data) {
+
+                },
+                complete: function () {
+                    // Schedule the next data fetch after a delay (e.g., every 5 seconds)
+                    setTimeout(fetchUserListData, 5000);
+                }
+            });
+        });
     </script>
 
 
