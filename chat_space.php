@@ -188,11 +188,8 @@ if (isset($_POST['logout_btn'])) {
 
 
                     <div class="input-group mb-3">
-                        <input name="send-message-box" type="text" class="form-control"
-                            placeholder="Type Messege to Send" aria-label="Recipient's username"
-                            aria-describedby="button-addon2">
-                        <button name="send-message-btn" class="btn btn-dark" type="submit" id="button-addon2"><i
-                                class="fa-solid fa-paper-plane"></i></button>
+                        <input id="send-message-box" type="text" class="form-control" placeholder="Type Messege to Send" aria-label="Recipient's username">
+                        <button name="send-message-btn" class="btn btn-dark" type="submit" id="id-send-message-btn"><i class="fa-solid fa-paper-plane"></i></button>
 
                     </div>
                 </div>
@@ -256,23 +253,23 @@ if (isset($_POST['logout_btn'])) {
 
 <!-- problem is messege not sent to db -->
     <script>
-        $("#button-addon2").on("click", function (event) {
-            event.preventDefault;
+        $("#id-send-message-btn").on("click", function (event) {
+            event.preventDefault();
             var msg = $("#send-message-box").val();
-            var incoming_msg_user = <?php echo $_GET["incoming_user"] ?>;
-            var outgoing_msg_user = <?php echo $_SESSION["username"] ?>;
+            var incoming_msg_user = "<?php echo $_GET["incoming_user"] ?>";
+            var outgoing_msg_user = "<?php echo $_SESSION["username"] ?>";
 
             $.ajax({
                 url: 'store_msg_to_db.php',
                 type: 'POST',
-                data: { msg: msg, incoming_msg_user: incoming_msg_user, outgoing_msg_user: outgoing_msg_user },
+                data: { msg:msg, incoming_msg_user:incoming_msg_user, outgoing_msg_user:outgoing_msg_user },
                 success: function (data) {
-
-                },
-                complete: function () {
-                    // Schedule the next data fetch after a delay (e.g., every 5 seconds)
-                    setTimeout(fetchUserListData, 5000);
+                    $("#send-message-box").val("");
                 }
+                // complete: function () {
+                //     // Schedule the next data fetch after a delay (e.g., every 5 seconds)
+                //     setTimeout(fetchUserListData, 5000);
+                // }
             });
         });
     </script>

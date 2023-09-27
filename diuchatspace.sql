@@ -32,8 +32,8 @@ USE `diuchatspace`;
 
 CREATE TABLE IF NOT EXISTS `messages` (
   `msg_id` int(11) NOT NULL,
-  `incoming_msg_user` int(255) NOT NULL,
-  `outgoing_msg_user` int(255) NOT NULL,
+  `incoming_msg_user` varchar(255) NOT NULL,
+  `outgoing_msg_user` varchar(255) NOT NULL,
   `msg` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
