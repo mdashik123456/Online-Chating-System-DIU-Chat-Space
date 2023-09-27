@@ -19,8 +19,8 @@ while ($row = mysqli_fetch_assoc($result)) {
         }
         $output .= "<tbody>
                 <tr>
-                    <td><a href='?incoming_user=".$row['username']."'><img src='".$row['profile_pic']."' class='img-thumbnail' style='height: 70px; width:70px;'></a></td>
-                    <td><a href='?incoming_user=".$row['username']."'><p>" . $row["name"]. "<br><i>".$row["bio"]."</i></p></a></td>
+                    <td><a href='?incoming_user=".$row['username']."' onclick='loadMessages()'><img src='".$row['profile_pic']."' class='img-thumbnail' style='height: 70px; width:70px;'></a></td>
+                    <td><a href='?incoming_user=".$row['username']."' onclick='loadMessages()'><p>" . $row["name"]. "<br><i>".$row["bio"]."</i></p></a></td>
                     <td>".$isLoggedIn."</td>
                 </tr>
             </tbody>";

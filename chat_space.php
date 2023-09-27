@@ -49,16 +49,12 @@ if (isset($_POST['logout_btn'])) {
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@100&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style_chat_space.css">
 
     <style>
@@ -91,22 +87,20 @@ if (isset($_POST['logout_btn'])) {
                     <div class="col-8">
                         <center>
                             <div class="content">
-                                <img id="profile_pic" class='img-thumbnail'
-                                    src="<?php echo $_SESSION['profile_pic']; ?>" alt="Profile Picture">
+                                <img id="profile_pic" class='img-thumbnail' src="<?php echo $_SESSION['profile_pic']; ?>" alt="Profile Picture">
                                 <div class="details">
                                     <span>
                                         <?php echo "<strong>" . $_SESSION['name'] . "</strong>";
-                                        //echo $_SESSION['profile_pic']; ?>
+                                        //echo $_SESSION['profile_pic']; 
+                                        ?>
                                     </span>
                                     <p>Active Now &nbsp;<i id="active_status" class="fa-solid fa-circle fa-2xs"></i></p>
                                 </div>
 
                                 <div class="search">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Enter Name to Search User"
-                                            aria-label="Recipient's username" aria-describedby="button-addon2">
-                                        <button class="btn btn-secondary" type="button" id="button-addon2"><i
-                                                class="fa-solid fa-magnifying-glass"></i></button>
+                                        <input type="text" class="form-control" placeholder="Enter Name to Search User" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                        <button class="btn btn-secondary" type="button" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -150,25 +144,25 @@ if (isset($_POST['logout_btn'])) {
                             $incoming_user = $_GET['incoming_user'];
                             $row = fetch_user_top($incoming_user, $conn);
                             echo "<img src='" . $row["profile_pic"] . "' class='img-thumbnail' style='height: 70px; width:70px;'>";
-                            ?>
-                        </p>
-                        <p class="text-center">
-                            <?php
+                        ?>
+                    </p>
+                    <p class="text-center">
+                        <?php
                             echo "<strong>" . $row["name"] . " (" . $row["username"] . ")</strong>";
-                            ?>
-                        </p>
-                        <p class="text-center">
-                            <?php
+                        ?>
+                    </p>
+                    <p class="text-center">
+                        <?php
                             echo $row["isLoggedIn"];
-                            ?>&nbsp;
-                            <?php
+                        ?>&nbsp;
+                    <?php
                             if ($row["isLoggedIn"] === "Active Now") {
                                 echo "<i id='active_status'class='fa-solid fa-circle fa-2xs'></i>";
                             } else {
                                 echo "<i id='active_status'class='fa-regular fa-circle fa-2xs'></i>";
                             }
                         }
-                        ?>
+                    ?>
                     </p>
 
 
@@ -176,19 +170,19 @@ if (isset($_POST['logout_btn'])) {
 
                         <!-- Add more messages here -->
                         <!-- <div class="message other-message">
-                                <p>Hello, how are you?</p>
-                            </div>
+                            <p>Hello, how are you?</p>
+                        </div>
 
-                            <div class="message user-message">
-                                <p>I'm doing great! Thanks for asking.</p>
-                            </div> -->
+                        <div class="message user-message">
+                            <p>I'm doing great! Thanks for asking.</p>
+                        </div> -->
                         <!-- Add more messages here -->
 
                     </div>
 
 
                     <div class="input-group mb-3">
-                        <input id="send-message-box" type="text" class="form-control" placeholder="Type Messege to Send" aria-label="Recipient's username">
+                        <input id="send-message-box" type="text" class="form-control" placeholder="Type Messege to Send" autocomplete="off" aria-label="Recipient's username">
                         <button name="send-message-btn" class="btn btn-dark" type="submit" id="id-send-message-btn"><i class="fa-solid fa-paper-plane"></i></button>
 
                     </div>
@@ -203,8 +197,7 @@ if (isset($_POST['logout_btn'])) {
 
 
     <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
 
     <script>
@@ -212,12 +205,12 @@ if (isset($_POST['logout_btn'])) {
             $.ajax({
                 url: 'get_user_from_db.php',
                 type: 'POST',
-                success: function (data) {
+                success: function(data) {
                     $('#user_list_table').empty();
                     $('#user_list_table').html(data);
 
                 },
-                complete: function () {
+                complete: function() {
                     // Schedule the next data fetch after a delay (e.g., every 5 seconds)
                     setTimeout(fetchUserListData, 5000);
                 }
@@ -226,34 +219,35 @@ if (isset($_POST['logout_btn'])) {
 
         // Initial data fetch
         fetchUserListData();
-
-
-
-
-
-        // function loadMessages(){
-        //     var msg = $("")
-        //     $.ajax({
-        //         url: 'get_messages_from_db.php?incoming_user=<?php //echo $_GET['incoming_user']; ?>',
-        //         type: 'POST',
-        //         success: function (data) {
-        //             $('#user_list_table').empty();
-        //             $('#user_list_table').html(data);
-
-        //         },
-        //         complete: function () {
-        //             // Schedule the next data fetch after a delay (e.g., every 5 seconds)
-        //             setTimeout(fetchUserListData, 5000);
-        //         }
-        //     });
-        // }
-
-
     </script>
 
-<!-- problem is messege not sent to db -->
+
     <script>
-        $("#id-send-message-btn").on("click", function (event) {
+        function loadMessages() {
+            var incoming_msg_user = "<?php echo $_GET["incoming_user"] ?>";
+            var outgoing_msg_user = "<?php echo $_SESSION["username"] ?>";
+            $.ajax({
+                url: 'get_messages_from_db.php',
+                type: 'POST',
+                data: {
+                    incoming_msg_user: incoming_msg_user,
+                    outgoing_msg_user: outgoing_msg_user
+                },
+                success: function(data) {
+                    $("#chat-massages-list").empty();
+                    $("#chat-massages-list").html(data);
+                },
+                complete: function() {
+                    // Schedule the next data fetch after a delay (e.g., every 2 seconds)
+                    setTimeout(loadMessages, 2000);
+                }
+            });
+        }
+        loadMessages();
+    </script>
+
+    <script>
+        $("#id-send-message-btn").on("click", function(event) {
             event.preventDefault();
             var msg = $("#send-message-box").val();
             var incoming_msg_user = "<?php echo $_GET["incoming_user"] ?>";
@@ -262,8 +256,12 @@ if (isset($_POST['logout_btn'])) {
             $.ajax({
                 url: 'store_msg_to_db.php',
                 type: 'POST',
-                data: { msg:msg, incoming_msg_user:incoming_msg_user, outgoing_msg_user:outgoing_msg_user },
-                success: function (data) {
+                data: {
+                    msg: msg,
+                    incoming_msg_user: incoming_msg_user,
+                    outgoing_msg_user: outgoing_msg_user
+                },
+                success: function(data) {
                     $("#send-message-box").val("");
                 }
                 // complete: function () {
@@ -277,8 +275,7 @@ if (isset($_POST['logout_btn'])) {
 
     <footer class="footer mt-auto py-3 bg-light">
         <div class="container">
-            <span class="text-muted">Created by Md. Ashiqur Rahman <a href="https://github.com/mdashik123456"
-                    target="_blank"><img class="footerImage" src="./images/github_icon.png" alt="GitHub"></a></span>
+            <span class="text-muted">Created by Md. Ashiqur Rahman <a href="https://github.com/mdashik123456" target="_blank"><img class="footerImage" src="./images/github_icon.png" alt="GitHub"></a></span>
         </div>
     </footer>
 </body>
