@@ -77,6 +77,7 @@ a:hover {
     color: black;
 } */
 
+
 .footerImage {
     height: 20px;
     width: 20px;
@@ -96,13 +97,13 @@ a:hover {
     overflow-y: auto;
 }
 
-.chat-list {
+#chat-massages-list {
     height: 700px;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 .chat-list::-webkit-scrollbar {
-    width: 0;
+    width: 3;
 }
 
 .message-container {

@@ -174,7 +174,7 @@ if (isset($_POST['logout_btn'])) {
                     </p>
 
 
-                    <div class="chat-list message-container" id="chat-massages-list">
+                    <div class="chat-list message-container mb-3" id="chat-massages-list">
 
                         <!-- Add more messages here -->
                         <!-- <div class="message other-message">
@@ -209,6 +209,12 @@ if (isset($_POST['logout_btn'])) {
 
 
     <script>
+        function scrollToBottom() {
+            var chatContainer = $('#chat-massages-list');
+            chatContainer.scrollTop(chatContainer[0].scrollHeight);
+        }
+        
+
         function fetchUserListData() {
             var search_user_box = $("#search_user_box").val();
             $.ajax({
@@ -248,6 +254,7 @@ if (isset($_POST['logout_btn'])) {
                 success: function(data) {
                     $("#chat-massages-list").empty();
                     $("#chat-massages-list").html(data);
+                    scrollToBottom();
                 },
                 complete: function() {
                     // Schedule the next data fetch after a delay (e.g., every 2 seconds)
@@ -256,6 +263,7 @@ if (isset($_POST['logout_btn'])) {
             });
         }
         loadMessages();
+        
     </script>
 
     <script>
@@ -276,6 +284,7 @@ if (isset($_POST['logout_btn'])) {
                     },
                     success: function(data) {
                         $("#send-message-box").val("");
+                        scrollToBottom();
                     }
                     // complete: function () {
                     //     // Schedule the next data fetch after a delay (e.g., every 5 seconds)
@@ -303,6 +312,7 @@ if (isset($_POST['logout_btn'])) {
                         },
                         success: function(data) {
                             $("#send-message-box").val("");
+                            scrollToBottom();
                         }
                     });
                 }
