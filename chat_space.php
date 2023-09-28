@@ -12,7 +12,7 @@ function log_out()
 
 function fetch_none_user_top($conn)
 {
-    $sql = "SELECT * FROM `users` WHERE `id`= '1' AND `name` = 'Sorry, no user found!' AND `email` = 'none@none.com' AND `gender` = 'none' AND `isLoggedIn` = 'none' AND `bio` = 'none'";
+    $sql = "SELECT * FROM `users` WHERE `id`= '1' AND `name` = 'Sorry, no user found! Please select a user to chat' AND `email` = 'none@none.com' AND `gender` = 'none' AND `isLoggedIn` = 'none' AND `bio` = 'none'";
     $result = mysqli_query($conn, $sql);
     return mysqli_fetch_assoc($result);
 }
