@@ -214,7 +214,9 @@ if (isset($_POST['logout_btn'])) {
             $.ajax({
                 url: 'get_user_from_db.php',
                 type: 'POST',
-                data: {search_user_box:search_user_box},
+                data: {
+                    search_user_box: search_user_box
+                },
                 success: function(data) {
                     $('#user_list_table').empty();
                     $('#user_list_table').html(data);
@@ -249,7 +251,7 @@ if (isset($_POST['logout_btn'])) {
                 },
                 complete: function() {
                     // Schedule the next data fetch after a delay (e.g., every 2 seconds)
-                    setTimeout(loadMessages, 2000);
+                    setTimeout(loadMessages, 1000);
                 }
             });
         }
@@ -260,25 +262,51 @@ if (isset($_POST['logout_btn'])) {
         $("#id-send-message-btn").on("click", function(event) {
             event.preventDefault();
             var msg = $("#send-message-box").val();
-            var incoming_msg_user = "<?php echo $_GET["incoming_user"] ?>";
-            var outgoing_msg_user = "<?php echo $_SESSION["username"] ?>";
+            if (msg !== "") {
+                var incoming_msg_user = "<?php echo $_GET["incoming_user"] ?>";
+                var outgoing_msg_user = "<?php echo $_SESSION["username"] ?>";
 
-            $.ajax({
-                url: 'store_msg_to_db.php',
-                type: 'POST',
-                data: {
-                    msg: msg,
-                    incoming_msg_user: incoming_msg_user,
-                    outgoing_msg_user: outgoing_msg_user
-                },
-                success: function(data) {
-                    $("#send-message-box").val("");
+                $.ajax({
+                    url: 'store_msg_to_db.php',
+                    type: 'POST',
+                    data: {
+                        msg: msg,
+                        incoming_msg_user: incoming_msg_user,
+                        outgoing_msg_user: outgoing_msg_user
+                    },
+                    success: function(data) {
+                        $("#send-message-box").val("");
+                    }
+                    // complete: function () {
+                    //     // Schedule the next data fetch after a delay (e.g., every 5 seconds)
+                    //     setTimeout(fetchUserListData, 5000);
+                    // }
+                });
+            }
+        });
+
+        $("#send-message-box").keyup(function(event) {
+            if (event.which == 13) {
+                event.preventDefault();
+                var msg = $("#send-message-box").val();
+                if (msg !== "") {
+                    var incoming_msg_user = "<?php echo $_GET["incoming_user"] ?>";
+                    var outgoing_msg_user = "<?php echo $_SESSION["username"] ?>";
+
+                    $.ajax({
+                        url: 'store_msg_to_db.php',
+                        type: 'POST',
+                        data: {
+                            msg: msg,
+                            incoming_msg_user: incoming_msg_user,
+                            outgoing_msg_user: outgoing_msg_user
+                        },
+                        success: function(data) {
+                            $("#send-message-box").val("");
+                        }
+                    });
                 }
-                // complete: function () {
-                //     // Schedule the next data fetch after a delay (e.g., every 5 seconds)
-                //     setTimeout(fetchUserListData, 5000);
-                // }
-            });
+            }
         });
     </script>
 
