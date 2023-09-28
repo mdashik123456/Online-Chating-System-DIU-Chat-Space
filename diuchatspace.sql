@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `name`, `email`, `password`, `gender`, `isLoggedIn`, `profile_pic`, `bio`) VALUES
-(1, '', 'Sorry, no user found!', 'none@none.com', '', 'none', 'none', './images/profile.PNG', 'none');
+(1, '', 'Sorry, no user found! Please select a user to chat', 'none@none.com', '', 'none', 'none', './images/profile.PNG', 'none');
 
 --
 -- Indexes for dumped tables

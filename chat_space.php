@@ -10,6 +10,14 @@ function log_out()
     exit();
 }
 
+function fetch_none_user_top($conn)
+{
+    $sql = "SELECT * FROM `users` WHERE `id`= '1' AND `name` = 'Sorry, no user found!' AND `email` = 'none@none.com' AND `gender` = 'none' AND `isLoggedIn` = 'none' AND `bio` = 'none'";
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_assoc($result);
+}
+
+
 function fetch_user_top($username, $conn)
 {
     $sql = "SELECT * FROM `users` WHERE `username` = '$username'";
@@ -17,9 +25,7 @@ function fetch_user_top($username, $conn)
     if (mysqli_num_rows($result) == 1) {
         return mysqli_fetch_assoc($result);
     } else {
-        $sql = "SELECT * FROM `users` WHERE `id`= '1' AND `name` = 'Sorry, no user found!' AND `email` = 'none@none.com' AND `gender` = 'none' AND `isLoggedIn` = 'none' AND `bio` = 'none'";
-        $result = mysqli_query($conn, $sql);
-        return mysqli_fetch_assoc($result);
+        return fetch_none_user_top($conn);
     }
 }
 
@@ -137,30 +143,34 @@ if (isset($_POST['logout_btn'])) {
 
                 <div class="container chat-container">
 
-                    <!-- incoming user  -->
+                    <!-- incoming user which is display in top -->
                     <p class="text-center">
                         <?php
                         if (isset($_GET['incoming_user'])) {
                             $incoming_user = $_GET['incoming_user'];
                             $row = fetch_user_top($incoming_user, $conn);
                             echo "<img src='" . $row["profile_pic"] . "' class='img-thumbnail' style='height: 70px; width:70px;'>";
-                        ?>
+                            ?>
                     </p>
                     <p class="text-center">
                         <?php
                             echo "<strong>" . $row["name"] . " (" . $row["username"] . ")</strong>";
-                        ?>
+                            ?>
                     </p>
                     <p class="text-center">
                         <?php
                             echo $row["isLoggedIn"];
-                        ?>&nbsp;
+                            ?>&nbsp;
                     <?php
                             if ($row["isLoggedIn"] === "Active Now") {
                                 echo "<i id='active_status'class='fa-solid fa-circle fa-2xs'></i>";
                             } else {
                                 echo "<i id='active_status'class='fa-regular fa-circle fa-2xs'></i>";
                             }
+                        } else{
+                            $row = fetch_none_user_top($conn);
+                            echo "<img src='" . $row["profile_pic"] . "' class='img-thumbnail' style='height: 70px; width:70px;'>";
+                            echo "<strong>" . $row["name"] . " (" . $row["username"] . ")</strong>";
                         }
                     ?>
                     </p>
