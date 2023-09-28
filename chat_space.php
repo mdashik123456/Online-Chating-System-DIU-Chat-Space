@@ -213,7 +213,7 @@ if (isset($_POST['logout_btn'])) {
             var chatContainer = $('#chat-massages-list');
             chatContainer.scrollTop(chatContainer[0].scrollHeight);
         }
-        
+
 
         function fetchUserListData() {
             var search_user_box = $("#search_user_box").val();
@@ -237,10 +237,7 @@ if (isset($_POST['logout_btn'])) {
 
         // Initial data fetch
         fetchUserListData();
-    </script>
 
-
-    <script>
         function loadMessages() {
             var incoming_msg_user = "<?php echo $_GET["incoming_user"] ?>";
             var outgoing_msg_user = "<?php echo $_SESSION["username"] ?>";
@@ -263,10 +260,7 @@ if (isset($_POST['logout_btn'])) {
             });
         }
         loadMessages();
-        
-    </script>
 
-    <script>
         $("#id-send-message-btn").on("click", function(event) {
             event.preventDefault();
             var msg = $("#send-message-box").val();
