@@ -103,11 +103,9 @@ if (isset($_POST['logout_btn'])) {
                                     <p>Active Now &nbsp;<i id="active_status" class="fa-solid fa-circle fa-2xs"></i></p>
                                 </div>
 
-                                <div class="search">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Enter Name to Search User" aria-label="Recipient's username" aria-describedby="button-addon2">
-                                        <button class="btn btn-secondary" type="button" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i></button>
-                                    </div>
+                                <div class="input-group mb-3 search">
+                                    <input id="search_user_box" type="text" class="form-control" placeholder="Enter Name or Username to Search User" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    <!-- <button class="btn btn-secondary" type="button" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i></button> -->
                                 </div>
                             </div>
                         </center>
@@ -150,24 +148,24 @@ if (isset($_POST['logout_btn'])) {
                             $incoming_user = $_GET['incoming_user'];
                             $row = fetch_user_top($incoming_user, $conn);
                             echo "<img src='" . $row["profile_pic"] . "' class='img-thumbnail' style='height: 70px; width:70px;'>";
-                            ?>
+                        ?>
                     </p>
                     <p class="text-center">
                         <?php
                             echo "<strong>" . $row["name"] . " (" . $row["username"] . ")</strong>";
-                            ?>
+                        ?>
                     </p>
                     <p class="text-center">
                         <?php
                             echo $row["isLoggedIn"];
-                            ?>&nbsp;
+                        ?>&nbsp;
                     <?php
                             if ($row["isLoggedIn"] === "Active Now") {
                                 echo "<i id='active_status'class='fa-solid fa-circle fa-2xs'></i>";
                             } else {
                                 echo "<i id='active_status'class='fa-regular fa-circle fa-2xs'></i>";
                             }
-                        } else{
+                        } else {
                             $row = fetch_none_user_top($conn);
                             echo "<img src='" . $row["profile_pic"] . "' class='img-thumbnail' style='height: 70px; width:70px;'>";
                             echo "<strong>" . $row["name"] . " (" . $row["username"] . ")</strong>";
@@ -212,9 +210,11 @@ if (isset($_POST['logout_btn'])) {
 
     <script>
         function fetchUserListData() {
+            var search_user_box = $("#search_user_box").val();
             $.ajax({
                 url: 'get_user_from_db.php',
                 type: 'POST',
+                data: {search_user_box:search_user_box},
                 success: function(data) {
                     $('#user_list_table').empty();
                     $('#user_list_table').html(data);

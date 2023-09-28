@@ -3,7 +3,8 @@
 session_start();
 include_once("./connection.php");
 
-$sql = "SELECT * FROM `users`";
+$search_user_box = $_POST["search_user_box"];
+$sql = "SELECT * FROM `users` WHERE `name` LIKE '%".$search_user_box."%' OR `username` LIKE '%".$search_user_box."%'";
 
 $result = mysqli_query($conn, $sql);
 
