@@ -232,7 +232,7 @@ if (isset($_POST['logout_btn'])) {
                 complete: function() {
                     // Schedule the next data fetch after a delay (e.g., every 5 seconds)
                     var set_fetch_user_time_out = setTimeout(fetchUserListData, 5000);
-                    // clearTimeout(set_fetch_user_time_out);
+                    clearTimeout(set_fetch_user_time_out);
                 }
             });
         }
@@ -262,7 +262,7 @@ if (isset($_POST['logout_btn'])) {
                 complete: function() {
                     // Schedule the next data fetch after a delay (e.g., every 2 seconds)
                     var set_load_message_time_out = setTimeout(loadMessages, 2000);
-                    // clearTimeout(set_load_message_time_out);
+                    clearTimeout(set_load_message_time_out);
                 }
             });
         }
@@ -289,11 +289,12 @@ if (isset($_POST['logout_btn'])) {
                     },
                     success: function(data) {
                         $("#send-message-box").val("");
+                        loadMessages();
                         scrollToBottom();
                     }
                     // complete: function () {
                     //     // Schedule the next data fetch after a delay (e.g., every 5 seconds)
-                    //     setTimeout(fetchUserListData, 5000);
+                        // setTimeout(fetchUserListData, 5000);
                     // }
                 });
             }
