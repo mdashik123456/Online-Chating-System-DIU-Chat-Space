@@ -246,9 +246,7 @@ if (isset($_POST['logout_btn'])) {
     <script>
         var incoming_msg_user;
         var outgoing_msg_user;
-
-        var f = 0;
-        function loadMessages() {
+        function loadMessages(f) {
             incoming_msg_user = "<?php echo $_GET["incoming_user"] ?>";
             outgoing_msg_user = "<?php echo $_SESSION["username"] ?>";
             $.ajax({
@@ -261,10 +259,10 @@ if (isset($_POST['logout_btn'])) {
                 success: function(data) {
                     $("#chat-massages-list").empty();
                     $("#chat-massages-list").html(data);
-                    var set_load_message_time_out = setTimeout(loadMessages, 0);
-                    if(f == 0){
+                    var set_load_message_time_out = setTimeout(loadMessages(0), 0);
+                    if(f != 0){
                         scrollToBottom();
-                        f = 1;
+                        f = 0;
                     }
                 },
                 complete: function() {
@@ -273,7 +271,7 @@ if (isset($_POST['logout_btn'])) {
                 }
             });
         }
-        loadMessages();
+        loadMessages(1);
     </script>
 
     <script>
@@ -294,7 +292,7 @@ if (isset($_POST['logout_btn'])) {
                     },
                     success: function(data) {
                         $("#send-message-box").val("");
-                        scrollToBottom();
+                        loadMessages(1);
                     }
                     // complete: function () {
                     //     // Schedule the next data fetch after a delay (e.g., every 5 seconds)
@@ -324,7 +322,7 @@ if (isset($_POST['logout_btn'])) {
                         },
                         success: function(data) {
                             $("#send-message-box").val("");
-                            scrollToBottom();
+                            loadMessages(1);
                         }
                     });
                 }
