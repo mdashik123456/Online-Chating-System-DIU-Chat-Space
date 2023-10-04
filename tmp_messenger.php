@@ -78,6 +78,7 @@
 
 
 
+<script>
 $("#button-addon2").on("click", function (event) {
             event.preventDefault;
             var msg = $("#send-message-box").val();
@@ -97,3 +98,5 @@ $("#button-addon2").on("click", function (event) {
                 }
             });
         });
+
+        </script>

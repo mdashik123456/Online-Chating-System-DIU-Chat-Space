@@ -174,19 +174,19 @@ if (isset($_POST['logout_btn'])) {
                     </p>
 
 
-                    <div class="chat-list message-container mb-3" id="chat-massages-list">
+                        <div class="chat-list message-container mb-3" id="chat-massages-list">
 
-                        <!-- Add more messages here -->
-                        <!-- <div class="message other-message">
+                            <!-- Add more messages here -->
+                            <!-- <div class="message other-message">
                             <p>Hello, how are you?</p>
                         </div>
 
                         <div class="message user-message">
                             <p>I'm doing great! Thanks for asking.</p>
                         </div> -->
-                        <!-- Add more messages here -->
+                            <!-- Add more messages here -->
 
-                    </div>
+                        </div>
 
 
                     <div class="input-group mb-3">
@@ -247,6 +247,7 @@ if (isset($_POST['logout_btn'])) {
         var incoming_msg_user;
         var outgoing_msg_user;
 
+        var f = 0;
         function loadMessages() {
             incoming_msg_user = "<?php echo $_GET["incoming_user"] ?>";
             outgoing_msg_user = "<?php echo $_SESSION["username"] ?>";
@@ -261,7 +262,10 @@ if (isset($_POST['logout_btn'])) {
                     $("#chat-massages-list").empty();
                     $("#chat-massages-list").html(data);
                     var set_load_message_time_out = setTimeout(loadMessages, 0);
-                    scrollToBottom();
+                    if(f == 0){
+                        scrollToBottom();
+                        f = 1;
+                    }
                 },
                 complete: function() {
                     // Schedule the next data fetch after a delay (e.g., every 2 seconds)
