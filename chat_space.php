@@ -213,11 +213,14 @@ if (isset($_POST['logout_btn'])) {
             var chatContainer = $('#chat-massages-list');
             chatContainer.scrollTop(chatContainer[0].scrollHeight);
         }
-        </script>
+    </script>
 
-        <script>
+    <script>
+        var set_fetch_user_time_out;
+        var search_user_box;
+
         function fetchUserListData() {
-            var search_user_box = $("#search_user_box").val();
+            search_user_box = $("#search_user_box").val();
             $.ajax({
                 url: 'get_user_from_db.php',
                 type: 'POST',
@@ -227,26 +230,26 @@ if (isset($_POST['logout_btn'])) {
                 success: function(data) {
                     $('#user_list_table').empty();
                     $('#user_list_table').html(data);
-
+                    // Schedule the next data fetch after a delay (e.g., every 1 seconds)
+                    set_fetch_user_time_out = setTimeout(fetchUserListData, 1000);
                 },
                 complete: function() {
-                    // Schedule the next data fetch after a delay (e.g., every 5 seconds)
-                    var set_fetch_user_time_out = setTimeout(fetchUserListData, 5000);
-                    clearTimeout(set_fetch_user_time_out);
+                    // clearTimeout(set_fetch_user_time_out);
                 }
             });
         }
-
         // Initial data fetch
         fetchUserListData();
-        </script>
+    </script>
 
 
-        <script>
+    <script>
+        var incoming_msg_user;
+        var outgoing_msg_user;
 
         function loadMessages() {
-            var incoming_msg_user = "<?php echo $_GET["incoming_user"] ?>";
-            var outgoing_msg_user = "<?php echo $_SESSION["username"] ?>";
+            incoming_msg_user = "<?php echo $_GET["incoming_user"] ?>";
+            outgoing_msg_user = "<?php echo $_SESSION["username"] ?>";
             $.ajax({
                 url: 'get_messages_from_db.php',
                 type: 'POST',
@@ -257,21 +260,19 @@ if (isset($_POST['logout_btn'])) {
                 success: function(data) {
                     $("#chat-massages-list").empty();
                     $("#chat-massages-list").html(data);
+                    var set_load_message_time_out = setTimeout(loadMessages, 0);
                     scrollToBottom();
                 },
                 complete: function() {
                     // Schedule the next data fetch after a delay (e.g., every 2 seconds)
-                    var set_load_message_time_out = setTimeout(loadMessages, 2000);
-                    clearTimeout(set_load_message_time_out);
+                    // clearTimeout(set_load_message_time_out);
                 }
             });
         }
         loadMessages();
+    </script>
 
-        </script>
-
-        <script>
-
+    <script>
         $("#id-send-message-btn").on("click", function(event) {
             event.preventDefault();
             var msg = $("#send-message-box").val();
@@ -289,19 +290,18 @@ if (isset($_POST['logout_btn'])) {
                     },
                     success: function(data) {
                         $("#send-message-box").val("");
-                        loadMessages();
                         scrollToBottom();
                     }
                     // complete: function () {
                     //     // Schedule the next data fetch after a delay (e.g., every 5 seconds)
-                        // setTimeout(fetchUserListData, 5000);
+                    // setTimeout(fetchUserListData, 5000);
                     // }
                 });
             }
         });
-        </script>
+    </script>
 
-    <script>   
+    <script>
         $("#send-message-box").keyup(function(event) {
             if (event.which == 13) {
                 event.preventDefault();
